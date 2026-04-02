@@ -12,14 +12,24 @@
   </head>
   <body>
 
+
+<!--Login form-->
     <h1> Welcome to PanLove </h1>
     <p>Enter your email</p>
 <form action="./login.php" method="POST"> 
     <label for="email">Email:</label><br>
     <input type="email" id="email" name="email" required><br><br>
-    
+    <p>Enter your password</p>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
     <button type="submit">Login</button>
 </form>
+
+<!--Signup form-->
+    <h1>Don't have an account?</h1>
+    <button onclick="window.location.href='./signup.php'">Sign Up</button>
+
+
 
 
     <!-- Optional JavaScript; choose one of the two! -->
