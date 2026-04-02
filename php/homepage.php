@@ -12,6 +12,8 @@
   </head>
   <body>
 
+    <p> Welcome to PanLove, the best place to find your next favorite pan! </p>
+
 
      <script type = "text/javascript" src = "./js/cartFuncs.js"></script>
 
