@@ -1,3 +1,37 @@
+<?php
+session_start();
+
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    if (!empty($email) && !empty($password)) {
+        // 1. Prepare the SQL statement to find the user
+        $stmt = $pdo->prepare("SELECT id, password FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+
+        // 2. Verify if user exists and password matches the hash
+        if ($user && password_verify($password, $user['password'])) {
+            // Success! Set session variables
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['loggedIn'] = true;
+            header("Location: ./homepage.php");
+            exit;
+        } else {
+            $errorMsg = "Invalid email or password.";
+        }
+    } else {
+        $errorMsg = "Email and password are required.";
+    }
+}
+
+function redirect($url) {
+    header("Location: $url");
+    exit();
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
