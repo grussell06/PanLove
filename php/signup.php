@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,6 +15,72 @@
     <title>Sign Up</title>
   </head>
   <body>
+    <div class="container">
+
+    <h2> Create Account </h2>
+    <form action="./signup.php" method="POST">
+        <label for="fname">First Name:</label><br>
+        <input type="text" id="fname" name="fname" required><br><br>
+        <label for="lname">Last Name:</label><br>
+        <input type="text" id="lname" name="lname" required><br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        <label for="grade">Grade:</label><br>
+        <select id="grade" name="grade" required><br><br>
+            <option value="" disabled selected>Select Grade</option>
+            <option value="Freshman">Freshman</option>
+            <option value="Sophomore">Sophomore</option>
+            <option value="Junior">Junior</option>
+            <option value="Senior">Senior</option>
+        </select><br><br>
+        <label for="sorority">Sorority:</label><br>
+        <select id="sorority" name="sorority" required><br><br>
+            <option value="" disabled selected>Select Sorority</option>
+            <option value="Alpha Omicron Pi">Alpha Omicron Pi</option>
+            <option value="Delta Gamma">Delta Gamma</option>
+            <option value="Kappa Delta">Kappa Delta</option>
+            <option value="Alpha Delta Pi">Alpha Delta Pi</option>
+            <option value="Alpha Gamma Delta">Alpha Gamma Delta</option>
+            <option value="Delta Zeta">Delta Zeta</option>
+            <option value="Phi Mu">Phi Mu</option>
+            <option value="Zeta Tau Alpha">Zeta Tau Alpha</option>
+        </select><br><br>
+        <button type="submit">Sign Up</button>
+
+        <?php
+        require_once "dbFuncs.php";
+
+        if(isset($_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['password'], $_POST['grade'], $_POST['sorority']))
+        {
+            $fname = $_POST['fname'];
+            $lname = $_POST['lname'];
+            $email = $_POST['email'];
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $grade = $_POST['grade'];
+            $sorority = $_POST['sorority'];
+
+            try {
+                $pdo = connectDB();
+
+                $checkStmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+                $checkStmt->execute([$email]);
+                $emailExists = $checkStmt->fetchColumn();
+
+                if ($emailExists > 0) {
+                    echo "Error: An account with this email already exists.";
+                } else {
+                    $stmt = $pdo->prepare("INSERT INTO users (fname, lname, email, password, grade, sorority) VALUES (?, ?, ?, ?, ?, ?)");
+                    $stmt->execute([$fname, $lname, $email, $password, $grade, $sorority]);
+                    echo "Account created successfully!";
+                }
+
+              } catch (PDOException $e) {
+                  echo "Database Error: " . $e->getMessage();
+                }
+        }
+        ?>
 
 
 
