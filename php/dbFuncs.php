@@ -5,7 +5,9 @@ function connectDB()
   $db = "panlovedb";
   $user = "phpUser";
   $pwd = "PhpUser@1234";
-
+ //trying for paige's local: 
+ //$user = "root";
+ //$pwd = "";
 
   $attr = "mysql:host=$host;dbname=$db";
   $opts=[
