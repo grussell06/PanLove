@@ -41,7 +41,7 @@ session_start();
 
 
 <div class="footer">
-    <p>&copy; 2024 PanLove. All rights reserved.</p>
+    <p>&copy; 2026 PanLove. All rights reserved.</p>
 
   </div>
   </body>
