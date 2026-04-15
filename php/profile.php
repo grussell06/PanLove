@@ -97,7 +97,7 @@ if (!$user) {
 
     <title>Profile</title>
 </head>
-<body>
+<body class="profile-body">
     <ul class="navBar">
         <li><a href="./homepage.php">Home</a></li>
         <li><a href="./events.php">Events</a></li>
@@ -115,7 +115,7 @@ if (!$user) {
         ?>
     </ul>
 
-    <div class="container mt-5">
+    <div class="container profile-container">
         <h2>My Profile</h2>
 
         <?php if (isset($successMsg)): ?>

@@ -1,3 +1,14 @@
+body.profile-body {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFC4E0; /* Light pink background to match login */
+    min-height: 100vh;
+}
+
+body.profile-body h2 {
+    color: #333;
+}
+
 .navBar {
     list-style: none;
     background-color: #333; /* Dark background */
@@ -32,11 +43,50 @@
     background-color: #0066cc;
 }
 
-/* event style, but NOT WORKING*/
-.event{
-    background-color: #f6cbef;
+/* Profile container matching login style */
+.profile-container {
+    max-width: 600px;
+    padding: 30px;
+    margin: 30px auto;
     border-radius: 8px;
+    background-color: #fff; /* White background for the form */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
 }
+
+.form-control, .form-select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #B03060;
+    box-shadow: 0 0 0 0.2rem rgba(176, 48, 96, 0.25);
+}
+
+/* Buttons matching login style */
+button.btn-primary {
+    background-color: #B03060;
+    border-color: #B03060;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+button.btn-primary:hover {
+    background-color: #880E4F;
+    border-color: #880E4F;
+}
+
+/* Alert messages */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+
