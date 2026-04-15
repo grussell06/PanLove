@@ -5,10 +5,10 @@ session_start();
 require_once "dbFuncs.php";
 $pdo = connectDB();
 
-// // $sql = "SELECT id, title, description, event_date FROM events WHERE event_date >= NOW() ORDER BY event_date ASC LIMIT 10";
-// // $stmt = $pdo->prepare($sql);
-// $stmt->execute();
-// $upcomingEvents = $stmt->fetchAll();
+//$sql = "SELECT id, title, description, event_date FROM events WHERE event_date >= NOW() ORDER BY event_date ASC LIMIT 10";
+//$stmt = $pdo->prepare($sql);
+//$stmt->execute();
+//$upcomingEvents = $stmt->fetchAll();
 ?>
 <!doctype html>
 <html lang="en">
