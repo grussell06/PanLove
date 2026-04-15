@@ -16,6 +16,24 @@ session_start();
 </head>
 
 <body class="container mt-4">
+    <ul class = "navBar">
+        <li><a href="./homepage.php">Home</a></li>
+        <li><a href="./events.php">Events</a></li>
+      <?php if (isset($_SESSION['user_id'])): ?>
+        <li><a href="./events.php">Create Event</a></li>
+      <?php endif; ?>
+        <li><a href="./announcements.php">Announcements</a></li>
+        <li><a href="./myChapter.php">My Chapter</a></li>
+        <?php
+        if (isset($_SESSION['user_id'])) {
+            // User is logged in
+            echo '<li><a href="./profile.php">Profile</a></li>';
+        } else {
+            // User is not logged in
+            echo '<li><a href="./login.php">Login</a></li>';
+        }
+        ?>
+    </ul>
 
 <h2>Upcoming Events</h2>
 <button type="button" onclick="toggleCreateForm()" class="btn btn-primary mb-3">

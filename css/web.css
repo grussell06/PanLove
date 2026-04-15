@@ -55,3 +55,67 @@ body {
     padding: 20px;
     margin-bottom: 20px;
 }
+
+body.login-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #FFC4E0; /* Light background for the login page */
+}
+
+body.login-body h1 {
+    margin-bottom: 20px;
+    color: #333; /* Or your berry color! */
+}
+
+.login-container {
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff; /* White background for the login form */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+/* Option 1: The "Berry" Button (Best for Login) */
+button.login[type="submit"] {
+    background-color: #B03060; 
+    color: white;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+button[type="submit"]:hover {
+    background-color: #880E4F; /* Darkens slightly on hover */
+}
+
+/* Option 2: The "Outline" Button (Best for Sign Up) */
+button.btn-outline-secondary {
+    background-color: transparent;
+    border: 2px solid #B03060;
+    color: #B03060;
+}
+
+button.btn-outline-secondary:hover {
+    background-color: #B03060;
+    color: white;
+}

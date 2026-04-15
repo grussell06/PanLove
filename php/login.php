@@ -36,6 +36,7 @@ function redirect($url) {
 <html lang="en">
   <head>
     <!-- Required meta tags -->
+    <link rel="stylesheet" href="../css/web.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -44,22 +45,30 @@ function redirect($url) {
 
     <title>Login</title>
   </head>
-  <body>
 </html><!--Login form-->
-    <h1> Welcome to PanLove </h1>
-    <p>Enter your email</p>
-<form action="./homepage.php" method="POST"> 
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
-    <p>Enter your password</p>
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password" required><br><br>
-    <button type="submit">Login</button>
-</form>
+    <body class = "login-body">
+        <h1>Welcome to PanLove</h1>
+    <div class="login-container">
+        <h3>Login</h3>
+        
+        <form action="./homepage.php" method="POST"> 
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button class = "login" type="submit" class="btn btn-primary">Login</button>
+        </form>
 
-<!--Take to Signup form-->
-    <h3>Don't have an account?</h3>
-    <button onclick="window.location.href='./signup.php'">Sign Up</button>
+        <hr style="margin: 20px 0;">
+
+        <h3>Don't have an account?</h3>
+        <button class="btn btn-outline-secondary" onclick="window.location.href='./signup.php'">
+            Sign Up
+        </button>
+    </div>
+</body>
 
 
 

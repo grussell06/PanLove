@@ -28,7 +28,7 @@ $pdo = connectDB();
         <li><a href="./homepage.php">Home</a></li>
         <li><a href="./events.php">Events</a></li>
       <?php if (isset($_SESSION['user_id'])): ?>
-        <li><a href="./create_event.php">Create Event</a></li>
+        <li><a href="./events.php">Create Event</a></li>
       <?php endif; ?>
         <li><a href="./announcements.php">Announcements</a></li>
         <li><a href="./myChapter.php">My Chapter</a></li>
