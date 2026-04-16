@@ -70,7 +70,7 @@ $pdo = connectDB();
 
 <!-- Button that triggers the pop-up -->
 <div class="container text-center my-4">
-    <button type="button" class="btn btn-primary btn-lg w-50" data-bs-toggle="modal" data-bs-target="#postModal">
+    <button type="button" id="postButton" class="btn btn-lg w-50" data-bs-toggle="modal" data-bs-target="#postModal">
         What's on your mind?
     </button>
 </div>
@@ -195,8 +195,9 @@ echo '<div class="post-footer mt-2">';
 
 
 
-<div class="footer">
+<div class="footer" style="text-align: center;">
     <p>&copy; 2026 PanLove. All rights reserved.</p>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
