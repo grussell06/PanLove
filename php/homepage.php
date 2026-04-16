@@ -52,23 +52,6 @@ $pdo = connectDB();
     <h1>Welcome to Panlove</h1>
     <p>This is where your main page data goes.</p>
   
-  <section>
-    <h2>Upcoming Events</h2>
-    <?php if (!empty($upcomingEvents)): ?>
-      <ul>
-        <?php foreach ($upcomingEvents as $ev): ?>
-          <li>
-            <strong><?php echo htmlspecialchars($ev['title']); ?></strong>
-            <br>
-            <small><?php echo htmlspecialchars(date('F j, Y, g:i A', strtotime($ev['event_date']))); ?></small>
-            <p><?php echo nl2br(htmlspecialchars($ev['description'])); ?></p>
-          </li>
-        <?php endforeach; ?>
-      </ul>
-    <?php else: ?>
-      <p>No upcoming events.</p>
-    <?php endif; ?>
-  </section>
 
 </div>
 
