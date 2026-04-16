@@ -38,12 +38,12 @@ session_start();
         <label for="sorority">Sorority:</label><br>
         <select id="sorority" name="sorority" required><br><br>
             <option value="" disabled selected>Select Sorority</option>
-            <option value="Alpha Omicron Pi">Alpha Omicron Pi</option>
-            <option value="Delta Gamma">Delta Gamma</option>
-            <option value="Kappa Delta">Kappa Delta</option>
             <option value="Alpha Delta Pi">Alpha Delta Pi</option>
             <option value="Alpha Gamma Delta">Alpha Gamma Delta</option>
+            <option value="Alpha Omicron Pi">Alpha Omicron Pi</option>
+            <option value="Delta Gamma">Delta Gamma</option>
             <option value="Delta Zeta">Delta Zeta</option>
+            <option value="Kappa Delta">Kappa Delta</option>
             <option value="Phi Mu">Phi Mu</option>
             <option value="Zeta Tau Alpha">Zeta Tau Alpha</option>
         </select><br><br>

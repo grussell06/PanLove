@@ -15,8 +15,8 @@ $event_id = $_POST["event_id"];
 
 // Insert RSVP into database
 try {
-    $sql = "INSERT INTO event_rsvps (user_id, event_id, status)
-            VALUES (?, ?, 'going')";
+    $sql = "INSERT INTO events_rsvp (user_id, event_id, status)
+            VALUES (?, ?, 'going') ON DUPLICATE KEY UPDATE status = 'going'";
             //values has ?, ? since it's enum for status 
 
     $stmt = $pdo->prepare($sql);

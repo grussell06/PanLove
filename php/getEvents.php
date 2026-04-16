@@ -4,7 +4,12 @@ require_once "dbFuncs.php";
 
 $pdo = connectDB();
 
-$sql = "SELECT * FROM events ORDER BY event_date ASC";
+// Use a LEFT JOIN to include events even if they have 0 RSVPs
+$sql = "SELECT e.*, COUNT(r.event_id) AS rsvp_count 
+        FROM events e 
+        LEFT JOIN events_rsvp r ON e.event_id = r.event_id 
+        GROUP BY e.event_id 
+        ORDER BY e.event_date ASC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 

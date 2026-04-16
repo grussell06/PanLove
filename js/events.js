@@ -39,23 +39,21 @@ async function rsvp(eventId) {
     try {
         let response = await fetch("rsvp.php", {
             method: "POST",
-            headers: {
-                //tell server we're sending form data
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: "event_id=" + eventId
         });
 
         let result = await response.text();
 
-        alert("RSVP saved!");
-        loadEvents();
-
+        if (result.trim() === "success") {
+            alert("RSVP saved!");
+            loadEvents(); // Refresh the list to see the new count
+        } else {
+            alert("Server error: " + result);
+        }
     } catch (err) {
         console.error("RSVP error:", err);
-        alert("Something went wrong.");
     }
-
 }
 
 //this shows the form when user clicks create event, otherwise is hidden 
