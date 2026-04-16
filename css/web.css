@@ -56,3 +56,10 @@ body {
     margin-bottom: 20px;
 }
 
+h1{
+    text-align: center;
+    color:rgb(114, 67, 201);
+    font-size: 80px !important;
+    padding-top: 50px;
+}
+

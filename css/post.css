@@ -49,8 +49,45 @@ body {
 /* Styling for the post button, use a hashtag for selectors */
 #postButton{
     background-color: #b0e1ee;
-    font-family: Georgia;
+    font-family: "Original Surfer";
     font-size: 25px;
     padding: 14px;
     border-radius: 8px;
 }
+
+.original-surfer-regular {
+  font-family: "Original Surfer", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.atma-light {
+  font-family: "Atma", system-ui;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.atma-regular {
+  font-family: "Atma", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.atma-medium {
+  font-family: "Atma", system-ui;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.atma-semibold {
+  font-family: "Atma", system-ui;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.atma-bold {
+  font-family: "Atma", system-ui;
+  font-weight: 700;
+  font-style: normal;
+}
+

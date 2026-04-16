@@ -24,6 +24,10 @@ $pdo = connectDB();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Homepage</title>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Original+Surfer&display=swap');
+    </style>
   </head>
   <body>
     <ul class = "navBar">
@@ -45,26 +49,8 @@ $pdo = connectDB();
         ?>
     </ul>
   <div class="content">
-    <h1>Welcome to Panlove</h1>
-    <p>This is where your main page data goes.</p>
+    <h1 class = "atma-semibold">Welcome to PanLove</h1>
   
-  <section>
-    <h2>Upcoming Events</h2>
-    <?php if (!empty($upcomingEvents)): ?>
-      <ul>
-        <?php foreach ($upcomingEvents as $ev): ?>
-          <li>
-            <strong><?php echo htmlspecialchars($ev['title']); ?></strong>
-            <br>
-            <small><?php echo htmlspecialchars(date('F j, Y, g:i A', strtotime($ev['event_date']))); ?></small>
-            <p><?php echo nl2br(htmlspecialchars($ev['description'])); ?></p>
-          </li>
-        <?php endforeach; ?>
-      </ul>
-    <?php else: ?>
-      <p>No upcoming events.</p>
-    <?php endif; ?>
-  </section>
 
 </div>
 
