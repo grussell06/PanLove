@@ -73,7 +73,10 @@ session_start();
                 } else {
                     $stmt = $pdo->prepare("INSERT INTO users (fname, lname, email, password, grade, sorority) VALUES (?, ?, ?, ?, ?, ?)");
                     $stmt->execute([$fname, $lname, $email, $password, $grade, $sorority]);
-                    echo "Account created successfully!";
+                    //Auto-log in after signing up
+                    $_SESSION['user_id'] = $pdo->lastInsertId();
+                    $_SESSION['loggedIn'] = true;
+                    header("Location: homepage.php");
                 }
 
               } catch (PDOException $e) {
