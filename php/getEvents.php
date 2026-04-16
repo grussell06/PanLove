@@ -5,7 +5,8 @@ require_once "dbFuncs.php";
 $pdo = connectDB();
 
 // Use a LEFT JOIN to include events even if they have 0 RSVPs
-$sql = "SELECT e.*, COUNT(r.event_id) AS rsvp_count 
+$sql = "SELECT e.*, 
+               COUNT(CASE WHEN r.status = 'going' THEN 1 END) AS rsvp_count 
         FROM events e 
         LEFT JOIN events_rsvp r ON e.event_id = r.event_id 
         GROUP BY e.event_id 
