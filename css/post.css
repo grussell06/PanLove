@@ -49,8 +49,14 @@ body {
 /* Styling for the post button, use a hashtag for selectors */
 #postButton{
     background-color: #b0e1ee;
-    font-family: Georgia;
+    font-family: Emilys Candy;
     font-size: 25px;
     padding: 14px;
     border-radius: 8px;
+}
+
+.emilys-candy-regular {
+  font-family: "Emilys Candy", serif;
+  font-weight: 400;
+  font-style: normal;
 }
