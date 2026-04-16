@@ -1,0 +1,40 @@
+.newPost{
+    text-align: center;
+}
+
+button{
+    background-color: #fbe4fd;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.post-card{
+    border: 1px solid #ddd; 
+    padding: 15px; 
+    margin: 10px 0; 
+    border-radius: 8px;
+    
+}
+
+.post-image {
+    width: 20%;
+     /* Set your preferred "normal" height */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa; /* Light gray for empty space */
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Styling the image itself */
+.post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This crops the image to fill the space without stretching */
+    display: block;
+    justify-content: center;
+}
