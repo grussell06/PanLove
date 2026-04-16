@@ -6,65 +6,106 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //get events from db and display them on page
 async function loadEvents() {
-    let response = await fetch("getEvents.php");
-    let data = await response.json();
-    console.log(data);
+    try{ 
+        let response = await fetch("getEvents.php");
+        let data = await response.json();
 
-    let eventsContainer = document.getElementById("eventsContainer");
-    eventsContainer.innerHTML = ""; 
+        let eventsContainer = document.getElementById("eventsContainer");
+        eventsContainer.innerHTML = ""; 
 
-    //loop through events and create it, then add to page 
-    data.forEach(function(event){
-        eventsContainer.innerHTML += `
-            <div class="event">
-                <h3>${event.title}</h3>
-                <p>${event.description}</p>
-                <p><b>Date:</b> ${event.event_date}</p>
-                <p><b>Time:</b> ${event.event_time}</p>
-                <p><b>Location:</b> ${event.location}</p>
+        //loop through events and create it, then add to page 
+        data.forEach(function(event){
+            eventsContainer.innerHTML += `
+                <div class="event">
+                    <h3>${event.title}</h3>
+                    <p>${event.description}</p>
+                    <p><b>Date:</b> ${event.event_date}</p>
+                    <p><b>Time:</b> ${event.event_time}</p>
+                    <p><b>Location:</b> ${event.location}</p>
 
-                <button id="rsvpBtn" onclick="rsvp(${event.event_id})">RSVP</button> 
-                <span id="count-${event.event_id}">${event.rsvp_count || 0} going </span>
-            
-                </div>
-        `;
-
-    });
-
+                    <button class="rsvp-btn" data-event-id="${event.event_id}">RSVP</button>
+                    <span class="rsvp-count">${event.rsvp_count || 0} going</span>
+                    </div>
+            `;
+        });
+    } catch (err) {
+        console.error("Error loading events:", err);
+    }
 }
 
 
 //send rsvp to server and save to db 
+/*
 async function rsvp(eventId) {
     try {
         let response = await fetch("rsvp.php", {
             method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
             body: "event_id=" + eventId
         });
 
-        let result = await response.text();
+        let result = await response.json();
+        let countSpan = document.getElementById(`count-${eventId}`);
 
-        if (result.trim() === "success") {
-            alert("RSVP saved!");
-            loadEvents(); // Refresh the list to see the new count
-        } else {
-            alert("Server error: " + result);
+        if (result.status === "added" || result.status === "removed") {
+            countSpan.innerText = result.count + " going";
+        }
+        else if (result.status === "not_logged_in") {
+            alert("Please log in first");
+        }
+        else {
+            alert("Server error");
         }
     } catch (err) {
         console.error("RSVP error:", err);
     }
 }
+    */
+
+//rsvp button to look like like button 
+document.addEventListener("click", function(e) {
+    if (e.target.classList.contains("rsvp-btn")) {
+        const button = e.target;
+        const eventId = button.getAttribute("data-event-id");
+        const countSpan = button.nextElementSibling; // The span with the count
+
+        fetch("rsvp.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "event_id=" + eventId
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === "added" || data.status === "removed") {
+                // Update the count text
+                countSpan.innerText = data.count + " going";
+                
+                // Optional: Change button style based on status
+                if (data.status === "added") {
+                    button.classList.replace("btn-outline-primary", "btn-primary");
+                    button.innerText = "Going!";
+                } else {
+                    button.classList.replace("btn-primary", "btn-outline-primary");
+                    button.innerText = "RSVP";
+                }
+            } else if (data.status === "not_logged_in") {
+                alert("Please log in first");
+            } else {
+                alert("An error occurred.");
+            }
+        })
+        .catch(err => console.error("RSVP Error:", err));
+    }
+});
 
 //this shows the form when user clicks create event, otherwise is hidden 
 function toggleCreateForm() {
     let form = document.getElementById("createEventForm");
-
-    if (form.style.display === "none") {
-        form.style.display = "block";
-    } else {
-        form.style.display = "none";
-    }
+    form.style.display = (form.style.display === "none") ? "block" : "none";
 }
 
 //creates event by sending form data to server to save to db, then reloads events list to show new event

@@ -50,6 +50,7 @@ body {
 #postButton{
     background-color: #b0e1ee;
     font-family: "Original Surfer";
+    font-family: Emilys Candy;
     font-size: 25px;
     padding: 14px;
     border-radius: 8px;
@@ -91,3 +92,8 @@ body {
   font-style: normal;
 }
 
+.emilys-candy-regular {
+  font-family: "Emilys Candy", serif;
+  font-weight: 400;
+  font-style: normal;
+}
