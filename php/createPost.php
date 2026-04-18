@@ -8,7 +8,7 @@ if (isset($_POST['submitPost']) && isset($_SESSION['user_id'])) {
     $image_name = null;
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $target_dir = "uploads/";
+        $target_dir = "../uploads";
         // Generate a unique name to avoid overwriting files with the same name
         $image_name = time() . "_" . basename($_FILES["image"]["name"]);
         $target_file = $target_dir . $image_name;

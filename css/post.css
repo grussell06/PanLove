@@ -2,31 +2,30 @@
     text-align: center;
 }
 
-button{
-    background-color: #fbe4fd;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    padding: 4px;
-    border-radius: 8px;
-}
+
 
 .post-card{
     border: 5px solid #f3b1af; 
-    padding: 15px; 
+    padding: 20px; 
     margin: 10px 0; 
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white background */
+    box-shadow: 0 4px 12px #f25f5a58; /* Soft shadow */
+    max-width: 850px;
+    margin-left: auto; 
+    margin-right: auto;
+    width: 90%;
+    font-family: Georgia;
+    
 }
 
 .post-image {
-    width: 20%;
-     /* Set your preferred "normal" height */
-    overflow: hidden;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f8f9fa; /* Light gray for empty space */
-    border-radius: 8px;
+    background-color: transparent;
+    border-radius: 10px;
     margin-top: 10px;
 }
 
@@ -37,6 +36,8 @@ button{
     object-fit: cover; /* This crops the image to fill the space without stretching */
     display: block;
     justify-content: center;
+    border-radius: 10px;
+    max-width: 80%;
 }
 
 body {
@@ -44,17 +45,68 @@ body {
     background-size: cover;        /* fills the whole screen */
     background-repeat: no-repeat;  /* prevents tiling */
     background-position: center;   /* keeps it centered */
+    background-attachment: fixed;
 }
 
 /* Styling for the post button, use a hashtag for selectors */
 #postButton{
-    background-color: #b0e1ee;
-    font-family: "Original Surfer";
-    font-family: Emilys Candy;
+    background-image: linear-gradient(135deg, #bfc4ff, rgb(149, 199, 194)) !important;
+    font-family: "Original Surfer" !important;
     font-size: 25px;
+    color: white;
     padding: 14px;
-    border-radius: 8px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: white;
+    width: 60%;
+
 }
+
+.modal-header{
+    background-color: #f49f51;
+    font-family: Georgia;
+    color: white;
+}
+
+.modal-body{
+    background-color: #f7ccad;
+}
+
+#addPhotoBtn{
+    background-color: #f49f51;
+    color: white;
+    border: none;
+    font-family: Georgia;
+}
+
+#postBtn{
+    background-color: #f490b9;
+    color: white;
+    font-family: Georgia;
+    border: none;
+    font-size: large;
+}
+
+#userText{
+  background-color: rgb(252, 235, 231);
+  font-family: Georgia;
+  border-color: #f49f51;
+}
+
+#likeBtn{
+  background-color: #bfc4ff;
+  color: white;
+  border-radius: 10px;
+}
+
+#deletePostBtn{
+  text-decoration: none;
+}
+
+#deleteCmtBtn{
+  text-decoration: none;
+}
+
 
 .original-surfer-regular {
   font-family: "Original Surfer", sans-serif;
