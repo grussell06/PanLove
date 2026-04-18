@@ -3,8 +3,8 @@ function connectDB()
 {
   $host = "localhost";
   $db = "panlovedb";
-  $user = "root";
-  $pwd = "";
+  $user = "phpUser";
+  $pwd = "PhpUser@1234";
 
   $attr = "mysql:host=$host;dbname=$db";
   $opts=[
