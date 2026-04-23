@@ -25,6 +25,7 @@ session_start();
     <h2> Create Account </h2>
     <form action="./signup.php" method="POST" enctype="multipart/form-data" class="signup-form">
       <div class="row">
+        <!-- Left-hand column -->
         <div class="col-md-6">
           <label for="fname">First Name:</label><br>
           <input type="text" id="fname" name="fname" required><br><br>
@@ -40,8 +41,8 @@ session_start();
             <option value="Junior">Junior</option>
             <option value="Senior">Senior</option>
           </select><br><br>
-
         </div>  
+        <!-- Right-hand column -->
         <div class="col-md-6">
           <label for="lname">Last Name:</label><br>
           <input type="text" id="lname" name="lname" required><br><br>
@@ -75,9 +76,28 @@ session_start();
             </div>
           </div>
         </div>
-        <div class="profile-upload-section">
-          <label for="profile_pic" class="group-label">Profile Picture:</label>
-          <input type="file" id="profile_pic" name="profile_pic" accept="image/*" class="form-control">
+        
+        <div class="row">
+          <div class="col-md-6">
+            <p>Choose your profile picture:</p>
+          </div>
+          <div class="col-md-6">
+            <input type="file" name="image" id="imageInput" class="d-none" accept="image/*">
+
+            <div class="profile-upload-section">
+              <button type="button" id="addPhotoBtn" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('imageInput').click()">
+                Add Photo
+              </button>
+            </div>
+          </div>
+        </div>
+
+        
+        <div id="imagePreviewContainer" class="mb-3" style="display: none; text-align: center; position: relative; border: 1px solid #eee; padding: 5px; border-radius: 8px;">
+          <img id="imagePreview" class="imgPrev" src="#" alt="Preview" style="display: block; margin: 0 auto;">
+        
+          <button type="button" id="removePhoto" class="btn-close" aria-label="Close" 
+                style="position: absolute; top: 10px; right: 10px; background-color: white; border: 1px solid #eee;"></button>
         </div>
 
         <div class="form-footer">
@@ -151,5 +171,46 @@ session_start();
     -->
 
   </div>
+
+  <script>
+  const imageInput = document.getElementById('imageInput');
+  const previewContainer = document.getElementById('imagePreviewContainer');
+  const previewImage = document.getElementById('imagePreview');
+
+    imageInput.onchange = evt => {
+        const [file] = imageInput.files;
+        if (file) {
+            // Read the file and set it as the image source
+            previewImage.src = URL.createObjectURL(file);
+            // Show the preview container
+            previewContainer.style.display = 'block';
+        } else {
+            // Hide if no file is selected
+            previewContainer.style.display = 'none';
+        }
+    }
+    document.getElementById('removePhoto').onclick = () => {
+      imageInput.value = ""; // Clears the file from the input
+    previewContainer.style.display = 'none'; // Hides the preview
+    };
+
+    document.querySelectorAll('.like-btn').forEach(button => {
+    button.onclick = function() {
+        const postId = this.getAttribute('data-post-id');
+        const countSpan = this.querySelector('.like-count');
+
+        // Fetch is a modern way to do AJAX
+        fetch(`likePost.php?post_id=${postId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Update the number inside the span instantly
+                    countSpan.innerText = data.newCount;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    };
+});
+</script>
   </body>
 </html>
