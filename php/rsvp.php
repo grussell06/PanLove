@@ -63,7 +63,8 @@ try {
     
 
 } catch (Exception $e) {
-    echo json_encode(["status" => "error", "message" => "Server error"]);
+    error_log("RSVP Error: " . $e->getMessage());
+    echo json_encode(["status" => "error", "message" => "Server error: " . $e->getMessage()]);
 }
 exit();
 
