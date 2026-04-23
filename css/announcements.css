@@ -16,6 +16,11 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-family: Georgia;
     font-size: large;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .navBar li {
@@ -47,7 +52,7 @@ h1 {
     font-size: 80px !important;
     padding-top: 40px;
     text-shadow: 2px 2px 4px #ffffff;
-    font-family: Georgia;
+    font-family: 'Atma';
 }
 
 body {

@@ -47,6 +47,9 @@ $announcements = $annStmt->fetchAll();
     <title>Announcements</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/announcements.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Original+Surfer&display=swap');
+    </style>
 </head>
 
 <body class="container mt-4">
@@ -70,11 +73,13 @@ $announcements = $annStmt->fetchAll();
         <p class="lead">Latest announcements!</p>
     </div>
 
+    <!-- Only show the create announcement form if the user is an exec -->
     <?php if ($is_exec): ?>
         <div class="exec-actions mb-4">
             <button id="toggleCreate" class="btn btn-primary">Create Announcement</button>
         </div>
 
+        <!--create announcement form hidden until button is clicked -->
         <div id="createForm" class="create-announcement-box hidden mb-4">
             <h2>New Announcement</h2>
 
@@ -104,12 +109,13 @@ $announcements = $annStmt->fetchAll();
 
     <div class="announcements-list">
 
+    <!--if no announcements show message saying no announcements --> 
         <?php if (count($announcements) === 0): ?>
             <div class="alert alert-secondary">
                 No announcements have been posted yet.
             </div>
         <?php else: ?>
-
+            <!-- Loop through announcements and display them in styled boxes -->
             <?php foreach ($announcements as $ann): ?>
                 <div class="announcement-box mb-3">
 
@@ -133,7 +139,7 @@ $announcements = $annStmt->fetchAll();
         <?php endif; ?>
 
     </div>
-
+<!--js for announcements? -->
     <script src="../js/announcements.js"></script>
 
 </body>
