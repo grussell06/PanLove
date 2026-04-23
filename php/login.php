@@ -40,6 +40,7 @@ function redirect($url) {
   <head>
     <!-- Required meta tags -->
     <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/web.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -47,10 +48,14 @@ function redirect($url) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Login</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Original+Surfer&display=swap');
+    </style>
   </head>
 </html><!--Login form-->
     <body class = "login-body">
-        <h1>Welcome to PanLove</h1>
+        <h1>Welcome to PanLove!</h1>
     <div class="login-container">
         <h3>Login</h3>
         

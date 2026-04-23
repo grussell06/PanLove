@@ -34,8 +34,8 @@
 }
 
 .navBar a:hover {
-    background-color: rgb(247, 204, 173);
-    color: #e81b69; /* Berry color on hover */
+    background-color: rgb(247, 204, 173); /* light color on hover */
+    color: #e81b69; 
 }
 
 .navBar a:active {
@@ -59,3 +59,10 @@ h1{
     text-shadow: 2px 2px 4px #ffffff;
 }
 
+body {
+    background-image: url('../images/pinkBack.jpg');
+    background-size: cover;        /* fills the whole screen */
+    background-repeat: no-repeat;  /* prevents tiling */
+    background-position: center;   /* keeps it centered */
+    background-attachment: fixed;
+}

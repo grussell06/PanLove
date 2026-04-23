@@ -1,0 +1,139 @@
+h2 {
+    font-family: "Original Surfer";
+    color:#f49f51;
+    padding-bottom: 10px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.signup-container{
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff; /* White background for the login form */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 650px;
+}
+
+form {
+    text-align: center;
+    font-family: "Georgia";
+    color: #e81b69;
+}
+
+input {
+    width: 250px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: "Georgia";
+}
+
+select {
+    font-family: "Georgia";
+    color: #f49f51;
+    border-radius: 10px;
+    border-color: #f49f51;
+    padding: 5px 10px;
+}
+
+.exec-section {
+    grid-column: span 2;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
+}
+
+.group-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    width:100%;
+}
+
+.radio-group {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.radio-item input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: #fff;
+    display: inline-grid;
+    place-content: center;
+}
+
+.radio-item input[type="radio"]::before {
+    content: "";
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background-color: #f49f51;
+}
+
+.radio-item input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+
+.radio-item label {
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.profile-upload-section {
+    grid-column: span 2; /* Center it like the exec question */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Style the file input to match your theme */
+.profile-upload-section input[type="file"] {
+    max-width: 300px;
+    accent-color: #ff69b4; /* Matches your custom radio color */
+}
+
+
+button[type="submit"] {
+    background-color: #f490b9;
+    font-family: "Georgia"; 
+    color: white;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+}
+
+button[type="submit"]:hover {
+    background-color: #ec5494; /* Darkens slightly on hover */
+}

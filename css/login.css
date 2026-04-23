@@ -6,12 +6,15 @@ body.login-body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #FFC4E0; /* Light background for the login page */
 }
 
 body.login-body h1 {
     margin-bottom: 20px;
-    color: #333; /* Or your berry color! */
+    color:rgb(244, 144, 185);
+    font-size: 80px !important;
+    padding-top: 40px;
+    text-shadow: 2px 2px 4px #ffffff;
+    font-family: "Atma";
 }
 
 .login-container {
@@ -21,6 +24,8 @@ body.login-body h1 {
     background-color: #fff; /* White background for the login form */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+    font-family: "Georgia";
+    color: #e81b69;
 }
 
 input[type="email"], input[type="password"] {
@@ -29,7 +34,10 @@ input[type="email"], input[type="password"] {
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-family: "Georgia";
+    
 }
+
 button {
     padding: 10px 20px;
     background-color: #333;
@@ -41,25 +49,34 @@ button {
 }
 /* Option 1: The "Berry" Button (Best for Login) */
 button.login[type="submit"] {
-    background-color: #B03060; 
+    background-color: #f490b9;
+    font-family: "Georgia"; 
     color: white;
     border: none;
     font-weight: 600;
     letter-spacing: 0.5px;
+    border-radius: 10px;
 }
 
 button[type="submit"]:hover {
-    background-color: #880E4F; /* Darkens slightly on hover */
+    background-color: #ec5494; /* Darkens slightly on hover */
 }
 
 /* Option 2: The "Outline" Button (Best for Sign Up) */
 button.btn-outline-secondary {
     background-color: transparent;
-    border: 2px solid #B03060;
-    color: #B03060;
+    border: 2px solid #f49f51;
+    color: #f49f51;
+    border-radius: 10px;
 }
 
 button.btn-outline-secondary:hover {
-    background-color: #B03060;
+    background-color: #f49f51;
     color: white;
+}
+
+h3{
+    font-family: "Original Surfer";
+    color: #f49f51;
+    padding-bottom: 10px;
 }
