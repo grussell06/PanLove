@@ -17,6 +17,11 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-family: Georgia;
     font-size: large;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .navBar li {
@@ -42,7 +47,7 @@
     background-color: rgb(255, 231, 171);
 }
 
-/* event style, but NOT WORKING*/
+/* event style*/
 .event{
     background-color: #f6cbef;
     border-radius: 8px;
@@ -65,4 +70,5 @@ body {
     background-repeat: no-repeat;  /* prevents tiling */
     background-position: center;   /* keeps it centered */
     background-attachment: fixed;
+    padding-top: 50px;
 }

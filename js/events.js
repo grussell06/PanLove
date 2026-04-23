@@ -15,6 +15,7 @@ async function loadEvents() {
 
         //loop through events and create it, then add to page 
         data.forEach(function(event){
+            let buttonText = event.user_rsvped ? "Going!" : "RSVP";
             eventsContainer.innerHTML += `
                 <div class="event">
                     <h3>${event.title}</h3>
@@ -23,7 +24,7 @@ async function loadEvents() {
                     <p><b>Time:</b> ${event.event_time}</p>
                     <p><b>Location:</b> ${event.location}</p>
 
-                    <button class="rsvp-btn" data-event-id="${event.event_id}">RSVP</button>
+                    <button class="rsvp-btn" data-event-id="${event.event_id}">${buttonText}</button>
                     <span class="rsvp-count">${event.rsvp_count || 0} going</span>
                     </div>
             `;
@@ -84,12 +85,10 @@ document.addEventListener("click", function(e) {
                 // Update the count text
                 countSpan.innerText = data.count + " going";
                 
-                // Optional: Change button style based on status
+                // Change button text based on status
                 if (data.status === "added") {
-                    button.classList.replace("btn-outline-primary", "btn-primary");
                     button.innerText = "Going!";
                 } else {
-                    button.classList.replace("btn-primary", "btn-outline-primary");
                     button.innerText = "RSVP";
                 }
             } else if (data.status === "not_logged_in") {

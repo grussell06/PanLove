@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+// Handle logout
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: ./login.php");
+    exit();
+}
+
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: ./login.php");
@@ -183,6 +190,12 @@ if (!$user) {
             </div>
 
             <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+
+        <hr class="my-4">
+
+        <form action="./profile.php" method="POST">
+            <button type="submit" name="logout" class="btn btn-danger">Logout</button>
         </form>
     </div>
 

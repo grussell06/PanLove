@@ -1,9 +1,9 @@
-<?php
-session_start();
-?>
-<?php
-require_once "dbFuncs.php";
-$pdo = connectDB();
+  <?php
+  session_start();
+  ?>
+  <?php
+  require_once "dbFuncs.php";
+  $pdo = connectDB();
 
 //$sql = "SELECT id, title, description, event_date FROM events WHERE event_date >= NOW() ORDER BY event_date ASC LIMIT 10";
 //$stmt = $pdo->prepare($sql);
@@ -35,9 +35,6 @@ $pdo = connectDB();
     <ul class = "navBar">
         <li><a href="./homepage.php">Home</a></li>
         <li><a href="./events.php">Events</a></li>
-      <?php if (isset($_SESSION['user_id'])): ?>
-        <li><a href="./events.php">Create Event</a></li>
-      <?php endif; ?>
         <li><a href="./announcements.php">Announcements</a></li>
         <li><a href="./myChapter.php">My Chapter</a></li>
         <?php
