@@ -10,12 +10,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     if (!empty($email) && !empty($password)) {
-        // 1. Prepare the SQL statement to find the user
         $stmt = $pdo->prepare("SELECT user_id, password FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
-        // 2. Verify if user exists and password matches the hash
         if ($user && password_verify($password, $user['password'])) {
             // Success! Set session variables
             $_SESSION['user_id'] = $user['user_id'];
