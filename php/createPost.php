@@ -1,5 +1,6 @@
 <?php
 session_start();
+header('Content-Type: application/json');
 include 'dbFuncs.php';
 
 if (isset($_POST['submitPost']) && isset($_SESSION['user_id'])) {
@@ -21,20 +22,39 @@ if (isset($_POST['submitPost']) && isset($_SESSION['user_id'])) {
     try {
         $pdo = connectDB();
         
-        // Update this line to include image_path if you added that column to your DB
         $sql = "INSERT INTO posts (user_id, content, imageName) VALUES (?, ?, ?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$user_id, $content, $image_name]);
 
-        header("Location: homepage.php");
-        exit();
+        if ($stmt->execute([$user_id, $content, $image_name])) {
+            // 1. FETCH THE NAMES FROM THE DATABASE
+            $userStmt = $pdo->prepare("SELECT fname, lname FROM users WHERE user_id = ?");
+            $userStmt->execute([$user_id]);
+            $user = $userStmt->fetch();
+
+            // 2. RETURN DATA TO JAVASCRIPT
+            echo json_encode([
+                'status' => 'success',
+                'content' => htmlspecialchars($content),
+                'imageName' => $image_name,
+                'fname' => $user['fname'], // Now pulling from $user variable
+                'lname' => $user['lname'],
+                'timestamp' => date("F j, Y, g:i a") // Sending current time for the feed
+            ]);
+            exit();
+        }
+
     } catch (PDOException $e) {
-        die("Database error: " . $e->getMessage());
+        // Return errors as JSON so the AJAX call knows what went wrong
+        echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+        exit();
     }
 } else {
-    echo "Post failed. Debug info:<br>";
-    echo "Submit button pressed: " . (isset($_POST['submitPost']) ? 'Yes' : 'No') . "<br>";
-    echo "User ID in session: " . (isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'Empty');
+    // If the session is empty, let the AJAX know
+    echo json_encode([
+        'status' => 'error', 
+        'message' => 'User not logged in.',
+        'debug' => 'Session ID: ' . ($_SESSION['user_id'] ?? 'Empty')
+    ]);
     exit();
 }
 ?>

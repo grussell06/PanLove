@@ -1,7 +1,5 @@
   <?php
   session_start();
-  ?>
-  <?php
   require_once "dbFuncs.php";
   $pdo = connectDB();
 
@@ -49,15 +47,28 @@
     </ul>
   <div class="content">
     <h1 class = "atma-semibold">Welcome to PanLove!</h1>
-  
-
 </div>
+
+<?php
+$profilePic = "../images/temp-profile.jpg"; // Default profile picture
+
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT profile_pic FROM users WHERE user_id = ?");
+    $stmt->execute([$_SESSION['user_id']]);
+    $user = $stmt->fetch();
+    
+    // Check if the user has an uploaded profile picture
+    if ($user && !empty($user['profile_pic'])) {
+        $profilePic = "../uploads/" . $user['profile_pic'];
+    }
+}
+?>
 
 <div class="container d-flex justify-content-center align-items-center my-4">
     <!-- Profile Picture Container -->
     <div class="profile-pic-preview me-3">
         <!-- Replace 'temp-profile.jpg' with your actual temp filename later -->
-        <img src="../images/temp-profile.jpg" alt="Profile" class="rounded-circle shadow-sm" style="width: 60px; height: 60px; object-fit: cover; border: 3px solid #f3b1af;">
+        <img src="<?php echo htmlspecialchars($profilePic); ?>" alt="Profile" class="rounded-circle shadow-sm" style="width: 60px; height: 60px; object-fit: cover; border: 3px solid #f3b1af;">
     </div>
 
     <!-- The "What's on your mind?" Button -->
@@ -75,7 +86,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="createPost.php" method="POST" enctype="multipart/form-data">
+        <form action="createPost.php" id="ajax-post-form" enctype="multipart/form-data">
         <textarea name="content" id="userText" class="form-control mb-3" rows="4" placeholder="What's on your mind?" required></textarea>
     
         <!-- Hidden input -->
@@ -208,6 +219,42 @@ echo '<div class="post-footer mt-2">';
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../js/home.js"></script>
+<script>
+// Wait for the document to be ready
+document.addEventListener('DOMContentLoaded', function() {
+    const postForm = document.getElementById('ajax-post-form');
+
+    if (postForm) {
+        postForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // This is the line that stops the page from changing!
+
+            const formData = new FormData(this);
+            const feed = document.getElementById('feed'); // Or your feed column ID
+
+            fetch('createPost.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Close the modal (if using Bootstrap)
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('postModal'));
+                    if (modal) modal.hide();
+
+                    // Refresh the page automatically to show the new post
+                    // This is the easiest way to ensure Like/Delete buttons work
+                    location.reload(); 
+                } else {
+                    alert("Error: " + data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    }
+});
+</script>
+
 
   </body>
 </html>

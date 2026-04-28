@@ -4,6 +4,7 @@ body.login-body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    padding-top: 5px;
 }
 
 body.login-body h1 {
@@ -45,7 +46,7 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-/* Option 1: The "Berry" Button (Best for Login) */
+
 button.login[type="submit"] {
     background-color: #f490b9;
     font-family: "Georgia"; 
@@ -60,7 +61,6 @@ button[type="submit"]:hover {
     background-color: #ec5494; /* Darkens slightly on hover */
 }
 
-/* Option 2: The "Outline" Button (Best for Sign Up) */
 button.btn-outline-secondary {
     background-color: transparent;
     border: 2px solid #f49f51;

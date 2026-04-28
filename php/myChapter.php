@@ -44,7 +44,7 @@ $members = $stmt->fetchAll();
     <title>My Chapter</title>
 
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Original+Surfer&display=swap');
     </style>
   </head>
   <body>

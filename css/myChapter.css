@@ -12,8 +12,8 @@
 .content h1 {
     text-align: center;
     margin-bottom: 30px;
-    color: #333;
-    font-family: 'Emilys Candy', cursive;
+    color: rgb(149, 199, 194);
+    font-family: "Atma";
     font-size: 2.5em;
 }
 
@@ -39,17 +39,17 @@
 }
 
 .member-item:hover {
-    background-color: #f0f0f0;
+    background-color: #f8eaf4;
 }
 
 .member-name {
     font-weight: bold;
     font-size: 1.2em;
-    color: #333;
+    color: #e81b69;
 }
 
 .member-email {
-    color: #666;
+    color: #e81b69;
     font-style: italic;
 }
 

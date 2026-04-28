@@ -66,3 +66,36 @@ document.querySelectorAll('.comment-form').forEach(form => {
         .catch(error => console.error('Error:', error));
     };
 });
+
+document.getElementById('ajax-post-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Stop the page from refreshing
+
+    const formData = new FormData(this); // Automatically grabs text and files
+    const feed = document.getElementById('feed-container');
+
+    fetch('createPost.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json()) // Expecting JSON back from PHP
+    .then(data => {
+        if (data.status === 'success') {
+            // 1. Create a new post element
+            const newPost = document.createElement('div');
+            newPost.className = 'post-card';
+            newPost.innerHTML = `
+                <strong>${data.fname} ${data.lname}</strong>
+                <p>${data.content}</p>
+                ${data.imageName ? `<img src="../uploads/${data.imageName}">` : ''}
+            `;
+
+            // 2. Add it to the VERY TOP of the feed
+            feed.insertBefore(newPost, feed.firstChild);
+
+            // 3. Reset the form and close your modal
+            this.reset();
+            bootstrap.Modal.getInstance(document.getElementById('postModal')).hide();
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});

@@ -1,5 +1,54 @@
 <?php
 session_start();
+  require_once "dbFuncs.php";
+  
+  if(isset($_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['password'], $_POST['grade'], $_POST['sorority'], $_POST['is_exec']))
+  {
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $grade = $_POST['grade'];
+    $sorority = $_POST['sorority'];
+    $is_exec = $_POST['is_exec'];
+
+    $profile_pic = null;
+
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+      $upload_dir = '../uploads/';
+      $file_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+        
+      // Secure it by renaming the file to something unique
+      $new_filename = uniqid('user_', true) . '.' . $file_ext;
+      $target_path = $upload_dir . $new_filename;
+
+      if (move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
+        $profile_pic = $new_filename;
+      }
+    }
+
+    try {
+      $pdo = connectDB();
+
+      $checkStmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+      $checkStmt->execute([$email]);
+      $emailExists = $checkStmt->fetchColumn();
+
+      if ($emailExists > 0) {
+        echo "Error: An account with this email already exists.";
+      } else {
+        $stmt = $pdo->prepare("INSERT INTO users (fname, lname, email, password, grade, sorority, is_exec, profile_pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$fname, $lname, $email, $password, $grade, $sorority, $is_exec, $profile_pic]);
+        //Auto-log in after signing up
+        $_SESSION['user_id'] = $pdo->lastInsertId();
+        $_SESSION['loggedIn'] = true;
+        header("Location: homepage.php");
+      }
+
+      } catch (PDOException $e) {
+        echo "Database Error: " . $e->getMessage();
+      }
+        }
 ?>
 
 <!doctype html>
@@ -104,58 +153,7 @@ session_start();
             <button type="submit">Sign Up</button>
         </div>
 
-        <?php
-        require_once "dbFuncs.php";
-
-        if(isset($_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['password'], $_POST['grade'], $_POST['sorority'], $_POST['is_exec']))
-        {
-            $fname = $_POST['fname'];
-            $lname = $_POST['lname'];
-            $email = $_POST['email'];
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $grade = $_POST['grade'];
-            $sorority = $_POST['sorority'];
-            $is_exec = $_POST['is_exec'];
-            $profile_pic = "temp_profile.jpg";
-
-            if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] === 0) {
-              $upload_dir = 'uploads/';
-              $file_ext = pathinfo($_FILES['profile_pic']['name'], PATHINFO_EXTENSION);
         
-              // Secure it by renaming the file to something unique
-              $new_filename = uniqid('user_', true) . '.' . $file_ext;
-              $target_path = $upload_dir . $new_filename;
-
-              if (move_uploaded_file($_FILES['profile_pic']['tmp_name'], $target_path)) {
-                $profile_pic = $new_filename;
-              }
-            }
-
-            try {
-                $pdo = connectDB();
-
-                $checkStmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
-                $checkStmt->execute([$email]);
-                $emailExists = $checkStmt->fetchColumn();
-
-                if ($emailExists > 0) {
-                    echo "Error: An account with this email already exists.";
-                } else {
-                    $stmt = $pdo->prepare("INSERT INTO users (fname, lname, email, password, grade, sorority, is_exec, profile_pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->execute([$fname, $lname, $email, $password, $grade, $sorority, $is_exec]);
-                    //Auto-log in after signing up
-                    $_SESSION['user_id'] = $pdo->lastInsertId();
-                    $_SESSION['loggedIn'] = true;
-                    header("Location: homepage.php");
-                }
-
-              } catch (PDOException $e) {
-                  echo "Database Error: " . $e->getMessage();
-                }
-        }
-        ?>
-
-
 
 
 
