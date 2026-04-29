@@ -13,6 +13,11 @@ session_start();
     <title>Events</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/web.css">
+    <link rel="stylesheet" href="../css/events.css">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Original+Surfer&display=swap');
+    </style>
 </head>
 
 <body class="container mt-4">
@@ -33,14 +38,14 @@ session_start();
     </ul>
 
 <h2>Upcoming Events</h2>
-<button type="button" onclick="toggleCreateForm()" class="btn btn-primary mb-3">
+<button type="button" onclick="toggleCreateForm()" class="btn btn-primary mb-3" id="newEvent">
     Create New Event
 </button>
 
 <!--create event form, hidden and shown when button is clicked-->
 <div id="createEventForm" style="display:none;" class="mb-4 p-3 border rounded">
 
-    <h5>Create Event</h5>
+    <h4>Create Event</h4>
 
     <div class="mb-2">
         <input type="text" id="title" placeholder="Event Title">
@@ -63,7 +68,7 @@ session_start();
         <input type="text" id="chapter" placeholder="Organization">
     </div>
 
-    <button type="button" onclick="handleCreateEvent()" class="btn btn-success">
+    <button type="button" onclick="handleCreateEvent()" class="btn btn-success" id="saveEvent">
         Save Event
     </button>
 

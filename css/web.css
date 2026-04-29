@@ -47,15 +47,6 @@
     background-color: rgb(255, 231, 171);
 }
 
-/* event style*/
-.event{
-    background-color: #f6cbef;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
 h1{
     text-align: center;
     color:rgb(244, 144, 185);
@@ -71,4 +62,41 @@ body {
     background-position: center;   /* keeps it centered */
     background-attachment: fixed;
     padding-top: 50px;
+}
+
+/*fonts*/
+.original-surfer-regular {
+  font-family: "Original Surfer", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.atma-light {
+  font-family: "Atma", system-ui;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.atma-regular {
+  font-family: "Atma", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.atma-medium {
+  font-family: "Atma", system-ui;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.atma-semibold {
+  font-family: "Atma", system-ui;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.atma-bold {
+  font-family: "Atma", system-ui;
+  font-weight: 700;
+  font-style: normal;
 }

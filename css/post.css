@@ -40,7 +40,7 @@
 
 /* Styling for the post button, use a hashtag for selectors */
 #postButton{
-    background-image: linear-gradient(135deg, #bfc4ff, rgb(149, 199, 194)) !important;
+    background-image: linear-gradient(135deg, #f49f51, #f490b9) !important;
     font-family: "Original Surfer" !important;
     font-size: 25px;
     color: white;
@@ -98,41 +98,3 @@
 #deleteCmtBtn{
   text-decoration: none;
 }
-
-
-.original-surfer-regular {
-  font-family: "Original Surfer", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.atma-light {
-  font-family: "Atma", system-ui;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.atma-regular {
-  font-family: "Atma", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.atma-medium {
-  font-family: "Atma", system-ui;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.atma-semibold {
-  font-family: "Atma", system-ui;
-  font-weight: 600;
-  font-style: normal;
-}
-
-.atma-bold {
-  font-family: "Atma", system-ui;
-  font-weight: 700;
-  font-style: normal;
-}
-

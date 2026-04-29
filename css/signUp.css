@@ -15,7 +15,7 @@ body {
 .signup-container{
     padding: 20px;
     border-radius: 8px;
-    background-color: #fff; /* White background for the login form */
+    background-color: #fff; /* White background for the sign up form */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 650px;
@@ -152,6 +152,7 @@ button[type="submit"] {
     padding: 10px 20px;
     cursor: pointer;
     text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button[type="submit"]:hover {
