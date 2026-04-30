@@ -34,37 +34,6 @@ async function loadEvents() {
     }
 }
 
-
-//send rsvp to server and save to db 
-/*
-async function rsvp(eventId) {
-    try {
-        let response = await fetch("rsvp.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: "event_id=" + eventId
-        });
-
-        let result = await response.json();
-        let countSpan = document.getElementById(`count-${eventId}`);
-
-        if (result.status === "added" || result.status === "removed") {
-            countSpan.innerText = result.count + " going";
-        }
-        else if (result.status === "not_logged_in") {
-            alert("Please log in first");
-        }
-        else {
-            alert("Server error");
-        }
-    } catch (err) {
-        console.error("RSVP error:", err);
-    }
-}
-    */
-
 //rsvp button to look like like button 
 document.addEventListener("click", function(e) {
     if (e.target.classList.contains("rsvp-btn")) {
@@ -109,6 +78,29 @@ function toggleCreateForm() {
 
 //creates event by sending form data to server to save to db, then reloads events list to show new event
 async function handleCreateEvent() {
+    //grab values & validate if empty 
+    let title = document.getElementById("title").value.trim();
+    let description = document.getElementById("description").value.trim();
+    let event_date = document.getElementById("event_date").value;
+    let event_time = document.getElementById("event_time").value;
+    let location = document.getElementById("location").value.trim();
+    let chapter = document.getElementById("chapter").value;
+
+    // validate & stops if empty 
+    if (
+        title === "" ||
+        description === "" ||
+        event_date === "" ||
+        event_time === "" ||
+        location === "" ||
+        chapter === ""
+    ) {
+        alert("Please fill out all fields before creating an event.");
+        return; // stops function completely
+    }
+    
+    
+    //build body of event once validated 
     let body = 
     "title=" + document.getElementById("title").value +
     "&description=" + document.getElementById("description").value +
