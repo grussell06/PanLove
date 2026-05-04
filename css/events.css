@@ -49,7 +49,7 @@ h4 {
     box-shadow: 0 4px 12px #f25f5a58; /* Soft shadow */
     margin-left: auto; 
     margin-right: auto;
-    width: 100%;
+    width: 80%;
     font-family: Georgia;
 }
 
@@ -115,9 +115,10 @@ h4 {
     font-family: Georgia;  
     border-color: transparent;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: 10px;
     transition: transform 0.2s ease;
     color: white;
+    margin-right: 8px;
 }
 
 .rsvp-btn:hover {
