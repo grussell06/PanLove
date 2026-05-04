@@ -13,15 +13,28 @@ $sql = "SELECT e.*,
         FROM events e 
         LEFT JOIN events_rsvp r ON e.event_id = r.event_id 
         GROUP BY e.event_id 
-        ORDER BY e.event_date ASC";
+        ORDER BY e.event_date ASC, e.event_time ASC"; //order by date and time, soonest first
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$user_id, $user_id]);
 
 //connect to db and gets events data 
 $events = $stmt->fetchAll();
 
+//filter out past events, only show events that are today or in the future
+$now = new DateTime();
+
+$upcomingEvents = [];
+
+foreach ($events as $event) {
+    $eventDate = new DateTime($event['event_date']);
+
+    if ($eventDate >= $now) {
+        $upcomingEvents[] = $event;
+    }
+}
+
 //return events as JSON instead of PHP array 
 header('Content-Type: application/json');
-echo json_encode($events);
+echo json_encode($upcomingEvents);
 
 ?>

@@ -4,16 +4,20 @@ session_start();
 require_once "dbFuncs.php";
 $pdo = connectDB();
 
+$errorMsg = "";
+
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
+    //check if empty field 
     if (!empty($email) && !empty($password)) {
         $stmt = $pdo->prepare("SELECT user_id, password FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
+        //verify password 
         if ($user && password_verify($password, $user['password'])) {
             // Success! Set session variables
             $_SESSION['user_id'] = $user['user_id'];
@@ -56,7 +60,7 @@ function redirect($url) {
         <h1>Welcome to PanLove!</h1>
     <div class="login-container">
         <h3>Login</h3>
-        
+
         <form action="./login.php" method="POST"> 
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
@@ -65,6 +69,10 @@ function redirect($url) {
             <input type="password" id="password" name="password" required>
             
             <button class = "login" type="submit" class="btn btn-primary">Login</button>
+            
+            <!--show error message if invalid inputs -->
+            <?php if (!empty($errorMsg)) { echo "<p style='color:red;'>$errorMsg</p>"; } ?>
+
         </form>
 
         <hr style="margin: 20px 0;">

@@ -74,6 +74,7 @@ document.addEventListener("click", function(e) {
 function toggleCreateForm() {
     let form = document.getElementById("createEventForm");
     form.style.display = (form.style.display === "none") ? "block" : "none";
+
 }
 
 //creates event by sending form data to server to save to db, then reloads events list to show new event
