@@ -8,7 +8,7 @@
 /* Horizontal Navigation Bar */
 .navBar {
     list-style: none;
-    background-color:  rgb(244, 159, 81); /* Dark background */
+    background-color:  rgb(244, 159, 81);
     padding: 0;
     margin: 0;
     display: flex;

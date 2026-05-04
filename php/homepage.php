@@ -67,7 +67,6 @@ if (isset($_SESSION['user_id'])) {
 <div class="container d-flex justify-content-center align-items-center my-4">
     <!-- Profile Picture Container -->
     <div class="profile-pic-preview me-3">
-        <!-- Replace 'temp-profile.jpg' with your actual temp filename later -->
         <img src="<?php echo htmlspecialchars($profilePic); ?>" alt="Profile" class="rounded-circle shadow-sm" style="width: 60px; height: 60px; object-fit: cover; border: 3px solid #f3b1af;">
     </div>
 
@@ -135,9 +134,19 @@ if (isset($_SESSION['user_id'])) {
             echo '<div class="post-card">';
               echo '<strong>' . htmlspecialchars($row['fname'] . ' ' . $row['lname']) . '</strong>';
               $formattedDate = date("F j, Y, g:i a", strtotime($row['timestamp']));
-              echo '<small style="display: block; color: #664171;">' . $formattedDate . '</small>';
+              echo '<small style="display: block; color: #ec5494;">' . $formattedDate . '</small>';
               echo '<p style="margin-top: 10px;">' . htmlspecialchars($row['content']) . '</p>';
-            //Display image if uploaded
+              //Display delete post button if logged in
+              $p_id = $row['post_id'];
+                if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $row['user_id']) {
+                echo '<a href="deletePost.php?post_id=' . $p_id . '"  
+                         id="deletePostBtn"
+                         class="d-flex"
+                         onclick="return confirm(\'Are you sure you want to delete this post?\')">
+                         🗑️
+                      </a>';
+                }
+              //Display image if uploaded
               if (!empty($row['imageName'])) {
                 echo '<div class="post-image">';
                   echo '<img src="../uploads' . htmlspecialchars($row['imageName']) .'"alt = "Post photo">';
@@ -147,28 +156,19 @@ if (isset($_SESSION['user_id'])) {
                 echo '  <button class="btn btn-light btn-sm like-btn" id="likeBtn" data-post-id="' . $row['post_id'] . '">';
                 echo '     ❤️ <span class="like-count">' . $row['like_count'] . '</span>';
                 echo '  </button>';
-
-                $p_id = $row['post_id'];
-                if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $row['user_id']) {
-                echo '<a href="deletePost.php?post_id=' . $p_id . '"  
-                         id="deletePostBtn"
-                         onclick="return confirm(\'Are you sure you want to delete this post?\')">
-                         🗑️
-                      </a>';
-            }
               echo '</div>';
             
 
 
 echo '<div class="post-footer mt-2">';
     //Toggle link
-    echo '<a class="text-decoration-none" data-bs-toggle="collapse" href="#collapseComments' . $p_id . '" role="button">
-            💬
+    echo '<a class="text-decoration-none" id="commentBtn" data-bs-toggle="collapse" href="#collapseComments' . $p_id . '" role="button">
+            View Comments
           </a>';
 
     //Hidden container so comments aren't automatically displayed
     echo '<div class="collapse mt-2" id="collapseComments' . $p_id . '">';
-        echo '<div class="p-2 mt-2 bg-light rounded">';
+        echo '<div class="p-2 mt-2 rounded" id="cmtSection">';
             
         echo '<div id="comment-list-' . $p_id . '">';
             // --- DISPLAY COMMENTS ---
@@ -180,12 +180,14 @@ echo '<div class="post-footer mt-2">';
             $commStmt->execute([$p_id]);
             
             while ($comment = $commStmt->fetch()) {
-                echo '<div class="mb-2">';
+                echo '<div class="mb-2 d-flex justify-content-between align-items-center">';
+                echo '<div class="flex-grow-1 text-start">';
                 echo '  <strong>' . htmlspecialchars($comment['fname']) . ':</strong> ' . htmlspecialchars($comment['comment_text']);
-                
+                echo '</div>';
+
                 if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $comment['user_id']) {
                   echo '  <a href="deleteComment.php?comment_id=' . $comment['comment_id'] . '"  
-                   text-decoration: none;"
+                   class="text-decoration-none ms-2"
                    onclick="return confirm(\'Delete comment?\')">
                    <i class="bi bi-trash"></i> 🗑️
                 </a>';
@@ -197,7 +199,7 @@ echo '<div class="post-footer mt-2">';
           echo '<form class="comment-form d-flex mt-2" data-post-id="' . $p_id . '">';
             echo '<input type="hidden" name="post_id" value="' . $p_id . '">';
             echo '<input type="text" name="comment_text" class="form-control form-control-sm me-2" placeholder="Write a comment..." required>';
-            echo '<button type="submit" class="btn btn-primary btn-sm">Reply</button>';
+            echo '<button type="submit" class="btn btn-primary btn-sm" id="cmtBtn">Comment</button>';
           echo '</form>';
 
                 echo '</div>'; // End card-body

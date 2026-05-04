@@ -152,63 +152,9 @@ session_start();
         <div class="form-footer">
             <button type="submit">Sign Up</button>
         </div>
-
-        
-
-
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
-
   </div>
-
-  <script>
-  const imageInput = document.getElementById('imageInput');
-  const previewContainer = document.getElementById('imagePreviewContainer');
-  const previewImage = document.getElementById('imagePreview');
-
-    imageInput.onchange = evt => {
-        const [file] = imageInput.files;
-        if (file) {
-            // Read the file and set it as the image source
-            previewImage.src = URL.createObjectURL(file);
-            // Show the preview container
-            previewContainer.style.display = 'block';
-        } else {
-            // Hide if no file is selected
-            previewContainer.style.display = 'none';
-        }
-    }
-    document.getElementById('removePhoto').onclick = () => {
-      imageInput.value = ""; // Clears the file from the input
-    previewContainer.style.display = 'none'; // Hides the preview
-    };
-
-    document.querySelectorAll('.like-btn').forEach(button => {
-    button.onclick = function() {
-        const postId = this.getAttribute('data-post-id');
-        const countSpan = this.querySelector('.like-count');
-
-        // Fetch is a modern way to do AJAX
-        fetch(`likePost.php?post_id=${postId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    // Update the number inside the span instantly
-                    countSpan.innerText = data.newCount;
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    };
-});
-</script>
+    <script src="../js/signup.js"></script>
   </body>
 </html>

@@ -86,15 +86,33 @@
 }
 
 #likeBtn{
-  background-color: #bfc4ff;
+  background-color: #f3b1af;
   color: white;
   border-radius: 10px;
 }
 
 #deletePostBtn{
   text-decoration: none;
+  justify-self: right;
+}
+
+#commentBtn {
+  color:#e81b69;
 }
 
 #deleteCmtBtn{
   text-decoration: none;
+}
+
+#cmtSection {
+  background-color: #ffffffcb;
+  font-family: Georgia;
+}
+
+#cmtBtn {
+  background-color: #f490b9;
+  color: white;
+  font-family: Georgia;
+  border: none;
+  border-radius: 10px;
 }
