@@ -22,9 +22,14 @@ h4 {
     font-family: Georgia;
     border-color: transparent;
     border-radius: 10px;
-    transition : transform 0.2s ease;
     margin: 20px auto;
     display: block;
+    padding: 10px 20px;
+    font-size: 20px;
+}
+
+#newEvent:hover {
+    background-color: #ec5494; /* Darkens slightly on hover */
 }
 
 #saveEvent {
@@ -103,4 +108,18 @@ h4 {
     border-radius: 4px;
     padding: 4px;
     border: 1px solid #ccc;
+}
+
+.rsvp-btn{
+    background-color: #f490b9;
+    font-family: Georgia;  
+    border-color: transparent;
+    padding: 8px;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+    color: white;
+}
+
+.rsvp-btn:hover {
+    transform: scale(1.05);
 }
