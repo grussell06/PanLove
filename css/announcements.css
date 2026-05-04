@@ -70,7 +70,7 @@ body {
 
 /* CREATE ANNOUNCEMENT BOX */
 .create-announcement-box {
-    background-color: #f6cbef;
+    background-color: #fff5fc;
     border-radius: 10px;
     padding: 20px;
     margin: 20px auto;
@@ -78,14 +78,43 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+.lead{
+    font-size: 25px;
+    color: #231e3b;
+    margin-bottom: 20px;
+    font-family: Georgia;
+}
+
 /* BUTTON AREA */
 .exec-actions {
     text-align: center;
 }
 
-/* ANNOUNCEMENT CONTAINER (main replacement for card) */
+.create-btn{
+    background-color: #ef8bb5;
+    color: #fff;
+    font-family: Georgia;
+    border-color: transparent;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 23px;
+    transition: transform 0.2s ease;
+}
+
+.post-btn{
+    background-color: #e81b69;
+    color: #fff;
+    font-family: Georgia;
+    border-color: transparent;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+/* ANNOUNCEMENT CONTAINER */
 .announcement-box {
-    background-color: #f6cbef;
+    background-color: #fff5f9;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
@@ -119,7 +148,7 @@ body {
     color: #666;
 }
 
-/* HIDDEN CLASS (JS TOGGLE) */
+/* HIDDEN CLASS (toggles the js) */
 .hidden {
     display: none;
 }

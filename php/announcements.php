@@ -76,7 +76,7 @@ $announcements = $annStmt->fetchAll();
     <!-- Only show the create announcement form if the user is an exec -->
     <?php if ($is_exec): ?>
         <div class="exec-actions mb-4">
-            <button id="toggleCreate" class="btn btn-primary">Create Announcement</button>
+            <button id="toggleCreate" class="create-btn">Create Announcement</button>
         </div>
 
         <!--create announcement form hidden until button is clicked -->
@@ -102,7 +102,7 @@ $announcements = $annStmt->fetchAll();
                     <textarea id="ann_content" name="ann_content" class="form-control" rows="5" required></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-success">Post Announcement</button>
+                <button type="submit" class="post-btn">Post Announcement</button>
             </form>
         </div>
     <?php endif; ?>
@@ -139,7 +139,7 @@ $announcements = $annStmt->fetchAll();
         <?php endif; ?>
 
     </div>
-<!--js for announcements? -->
+<!--js for announcements -->
     <script src="../js/announcements.js"></script>
 
 </body>
