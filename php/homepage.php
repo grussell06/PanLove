@@ -67,7 +67,9 @@ if (isset($_SESSION['user_id'])) {
 <div class="container d-flex justify-content-center align-items-center my-4">
     <!-- Profile Picture Container -->
     <div class="profile-pic-preview me-3">
-        <img src="<?php echo htmlspecialchars($profilePic); ?>" alt="Profile" class="rounded-circle shadow-sm" style="width: 60px; height: 60px; object-fit: cover; border: 3px solid #f3b1af;">
+    <img src="<?php echo htmlspecialchars($profilePic); ?>?v=<?php echo time(); ?>" alt="Profile" 
+        class="rounded-circle shadow-sm" 
+        style="width: 60px; height: 60px; object-fit: cover; border: 3px solid #f3b1af;">
     </div>
 
     <!-- The "What's on your mind?" Button -->

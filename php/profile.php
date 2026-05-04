@@ -18,12 +18,25 @@ require_once "dbFuncs.php";
 $pdo = connectDB();
 
 // Handle form submission for updating profile
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['logout'])) {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
     $grade = $_POST['grade'];
     $sorority = $_POST['sorority'];
+    $user_id = $_SESSION['user_id'];
+
+    // Profile picture upload, if updating it
+    $new_profile_pic = null;
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+        $upload_dir = '../uploads/';
+        $file_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+        $new_profile_pic = "user_" . $user_id . "_" . time() . "." . $file_ext;
+        
+        if (!move_uploaded_file($_FILES['image']['tmp_name'], $upload_dir . $new_profile_pic)) {
+            $new_profile_pic = null; // Reset if move fails
+        }
+    }
 
     // Check if password change is requested
     $updatePassword = false;
@@ -51,22 +64,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!isset($errorMsg)) {
     try {
-        if ($updatePassword) {
-            $sql = "UPDATE users SET fname = ?, lname = ?, email = ?, grade = ?, sorority = ?, password = ? WHERE user_id = ?";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$fname, $lname, $email, $grade, $sorority, $hashedPassword, $_SESSION['user_id']]);
-        } else {
-            $sql = "UPDATE users SET fname = ?, lname = ?, email = ?, grade = ?, sorority = ? WHERE user_id = ?";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$fname, $lname, $email, $grade, $sorority, $_SESSION['user_id']]);
+        $params = [$fname, $lname, $email, $grade, $sorority];
+        $sql = "UPDATE users SET fname = ?, lname = ?, email = ?, grade = ?, sorority = ?";
+
+        if ($new_profile_pic) {
+            $sql .= ", profile_pic = ?";
+            $params[] = $new_profile_pic;
         }
-        $successMsg = "Profile updated successfully!";
-        
-        // Refresh $user data so the form shows the NEW info immediately
-        $stmt = $pdo->prepare("SELECT fname, lname, email, grade, sorority FROM users WHERE user_id = ?");
-        $stmt->execute([$_SESSION['user_id']]);
-        $user = $stmt->fetch();
-        
+        if ($updatePassword) {
+            $sql .= ", password = ?";
+            $params[] = $hashedPassword;
+        } 
+        $sql .= " WHERE user_id = ?";
+        $params[] = $user_id;
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        // Inside your UPDATE try block in profile.php, after $stmt->execute($params);
+    if ($new_profile_pic) {
+        $_SESSION['profile_pic'] = $new_profile_pic; // Update the session with the new filename
+    }
+
+        $successMsg = "Profile updated successfully!";    
     } catch (PDOException $e) {
         $errorMsg = "Database Error: " . $e->getMessage();
     }
@@ -137,7 +156,7 @@ if (!$user) {
             <div class="alert alert-danger"><?php echo $errorMsg; ?></div>
         <?php endif; ?>
 
-        <form action="./profile.php" method="POST">
+        <form action="./profile.php" method="POST" enctype="multipart/form-data">
             <div class = "row">
                 <!-- Left hand column -->
                 <div class="col-md-6">
